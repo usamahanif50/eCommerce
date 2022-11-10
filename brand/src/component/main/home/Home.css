@@ -417,10 +417,17 @@
   text-transform: uppercase;
   font-weight: bold;
 }
+.home-productSection a {
+  color: #000;
+}
 .home-Section3 h2 {
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
   padding: 0px 0px 40px 0px;
   /* margin-top: ; */
+}
+.mainProduct hr {
+  height: 2px;
+  background-color: rgba(155, 155, 155, 0.329);
 }

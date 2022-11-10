@@ -1,4 +1,5 @@
-import "./App.css";
+import React from "react";
+import Main from "./component/main/Main";
 import DashboardHome from "./component/dashboard/home/Home";
 import { Routes, Route, Link } from "react-router-dom";
 import OpenImage from "./component/dashboard/openImage/OpenImage";
@@ -7,32 +8,25 @@ import Signup from "./component/dashboard/signup/Signup";
 import Auth from "./component/dashboard/auth/Auth";
 import { Home } from "./component/main/home/Home";
 import Navbar from "./component/main/navbar/Navbar";
-import ProductPage from "./component/main/productPage/ProductPage";
-import WishList from "./component/main/wishlist/WishList";
+import { AddtoCart } from "./component/main/addTocart/AddtoCart";
+
 function App() {
   return (
     <div className="App">
-
-
+      <AddtoCart/>
+      {/* <Main></Main>
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />}></Route>
-          <Route path="/product/:id" element={<ProductPage />}></Route>
-          <Route path="/wishlist" element={<WishList />}></Route>
-
-
-
         </Route>
-
       </Routes>
-
       <Routes>
         <Route path={"/login"} element={<Login />}></Route>
         <Route path={"/signup"} element={<Signup />}></Route>
         <Route element={<Auth />}>
           <Route path={"/dashboard/*"} element={<DashboardHome />}></Route>
         </Route>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }

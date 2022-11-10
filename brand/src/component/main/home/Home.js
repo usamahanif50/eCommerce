@@ -27,26 +27,31 @@ import { convertLegacyProps } from "antd/lib/button/button";
 
 export const Home = () => {
   const [currenceyIcon, setcurrenceyIcon] = useState("$");
-  const [Data, setData] = useState("")
-  const [livingRoom, setlivingRoom] = useState("")
-
+  const [Data, setData] = useState("");
+  const [livingRoom, setlivingRoom] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3000/products")
-      .then(res => res.json())
-      .then(data => {
-        setData(data)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
 
-        console.log(data)
-        setlivingRoom(data.filter(category => (category.category) == "Living Room"))
-      })
+        console.log(data);
+        setlivingRoom(
+          data.filter((category) => category.category == "Living Room")
+        );
+      });
   }, []);
-
 
   return (
     <>
-
       <Carousel />
+      <Link to="/wishlist">
+        {" "}
+        <h1 style={{ textAlign: "center" }}>
+          Wiishlist <i className="fa fa-heart-o"></i>
+        </h1>
+      </Link>
       {/* <input type="text" onChange={(e) => hanlde(e)}></input> */}
       <div className="container home-Section1 ">
         <div className="row ">
@@ -84,20 +89,23 @@ export const Home = () => {
                 slideSpeed={true}
                 autoplay={true}
               >
-                {livingRoom && livingRoom.map((item, index)=>(
-
-                  <Link to={`/product/${item.id}`}>
-                    <div className="col-md-12 item card">
-                      <div className="img-bg">
-                        <img src={item.image}></img>
+                {livingRoom &&
+                  livingRoom.map((item, index) => (
+                    <Link to={`/product/${item.id}`}>
+                      <div className="col-md-12 item card">
+                        <div className="img-bg">
+                          <img src={item.image} alt={item.title}></img>
+                        </div>
+                        <div className="card-text">
+                          <p>{item.title}</p>
+                          <h4>
+                            {currenceyIcon}
+                            {item.price}
+                          </h4>
+                        </div>
                       </div>
-                      <div className="card-text">
-                        <p>{item.title}</p>
-                        <h4>{currenceyIcon}{item.price}</h4>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  ))}
               </OwlCarousel>
             </div>
           </div>
@@ -153,7 +161,10 @@ export const Home = () => {
               <Link>
                 <div className="col-md-12 item card">
                   <div className="img-bg">
-                    <img src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"></img>
+                    <img
+                      src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"
+                      alt="product"
+                    ></img>
                   </div>
                   <div className="card-text">
                     <h5>Product Clock</h5>
@@ -164,7 +175,10 @@ export const Home = () => {
               <Link>
                 <div className="col-md-12 item card">
                   <div className="img-bg">
-                    <img src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"></img>
+                    <img
+                      src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"
+                      alt="product"
+                    ></img>
                   </div>
                   <div className="card-text">
                     <h5>Product Clock</h5>
@@ -175,7 +189,10 @@ export const Home = () => {
               <Link>
                 <div className="col-md-12 item card">
                   <div className="img-bg">
-                    <img src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"></img>
+                    <img
+                      src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"
+                      alt="product"
+                    ></img>
                   </div>
                   <div className="card-text">
                     <h5>Product Clock</h5>
@@ -186,7 +203,10 @@ export const Home = () => {
               <Link>
                 <div className="col-md-12 item card">
                   <div className="img-bg">
-                    <img src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"></img>
+                    <img
+                      src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"
+                      alt="product"
+                    ></img>
                   </div>
                   <div className="card-text">
                     <h5>Product Clock</h5>
@@ -197,7 +217,10 @@ export const Home = () => {
               <Link>
                 <div className="col-md-12 item card">
                   <div className="img-bg">
-                    <img src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"></img>
+                    <img
+                      src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"
+                      alt="product"
+                    ></img>
                   </div>
                   <div className="card-text">
                     <h5>Product Clock</h5>
@@ -208,7 +231,10 @@ export const Home = () => {
               <Link>
                 <div className="col-md-12 item card">
                   <div className="img-bg">
-                    <img src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"></img>
+                    <img
+                      src="https://vollemobel.7uptheme.net/wp-content/uploads/2018/09/clocks7-600x686.jpg"
+                      alt="product"
+                    ></img>
                   </div>
                   <div className="card-text">
                     <h5>Product Clock</h5>
@@ -279,40 +305,40 @@ export const Home = () => {
               nav
             >
               <div class="item">
-                <img src={comp1} />
+                <img src={comp1} alt="logo" />
               </div>
               <div class="item">
-                <img src={comp2} />
+                <img src={comp2} alt="logo" />
               </div>{" "}
               <div class="item">
-                <img src={comp3} />
+                <img src={comp3} alt="logo" />
               </div>{" "}
               <div class="item">
-                <img src={comp4} />
+                <img src={comp4} alt="logo" />
               </div>{" "}
               <div class="item">
-                <img src={comp5} />
+                <img src={comp5} alt="logo" />
               </div>
               <div class="item">
-                <img src={comp6} />
+                <img src={comp6} alt="logo" />
               </div>
               <div class="item">
-                <img src={comp7} />
+                <img src={comp7} alt="logo" />
               </div>{" "}
               <div class="item">
-                <img src={comp8} />
+                <img src={comp8} alt="logo" />
               </div>{" "}
               <div class="item">
-                <img src={comp9} />
+                <img src={comp9} alt="logo" />
               </div>{" "}
               <div class="item">
-                <img src={comp11} />
+                <img src={comp11} alt="logo" />
               </div>
               <div class="item">
-                <img src={comp10} />
+                <img src={comp10} alt="logo" />
               </div>{" "}
               <div class="item">
-                <img src={comp12} />
+                <img src={comp12} alt="logo" />
               </div>
             </OwlCarousel>
           </div>

@@ -1,0 +1,39 @@
+.mainProducts .card {
+  margin: 30px 7px;
+  color: black !important;
+  box-shadow: 2px 2px 2px 2px rgba(203, 203, 203, 0.711);
+  transition: 0.5s;
+}
+.productHeader {
+  background: url();
+  width: 100%;
+  height: 35vh;
+  background-color: black;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+.card:hover {
+  margin-top: 20px;
+  transition: 0.5s;
+}
+.card .price {
+  font-weight: 600;
+}
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column;
+}
+.card-body {
+  padding: 0px;
+  width: 250px;
+}
+.card-body .name {
+  padding: 0px 4px 0px 4px !important;
+}
+.card-body .price {
+  padding: 0px 0px 10px 0px !important;
+}
