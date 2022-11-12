@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./AddtoCart.css";
+import { useSelector, useDispatch } from "react-redux"
+import { inCrement, deCrement } from "../../../Ducks/action/index"
+import { userContext } from "../../../Context"
 
 export const AddtoCart = () => {
+  const [Del, setDel] = useState(false)
+  const [Data, setData] = useState([])
+  const [ItemQuantity, setItemQuantity]=useState(0)
+  const { cart, setCart, total, setTotal, cartItem, setCartItem, totalCartItem, setTotalCartItem } = useContext(userContext);
+
+  const number = useSelector((state) => state.changeQunatity)
+  const dispatch = useDispatch()
+
+
+  const deleteHandle = (e) => {
+    const index = totalCartItem.indexOf(e);
+    if (index > -1) {
+      totalCartItem.splice(index, 1);
+    }
+    setDel(false);
+  };
+  useEffect(() => {
+    setDel(true);
+    setData(totalCartItem);
+    setItemQuantity(Data.length)
+  }, [Del]);
+
   return (
     <>
       <div className="cart-wrap">
@@ -9,6 +34,7 @@ export const AddtoCart = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="main-heading">Shopping Cart</div>
+              <div className="main-heading"><h4>Total Item {ItemQuantity}</h4></div>
               <div className="table-cart">
                 <table>
                   <thead>
@@ -20,92 +46,51 @@ export const AddtoCart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div className="display-flex align-center">
-                          <div className="img-product">
-                            <img
-                              src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg"
-                              alt
-                              className="mCS_img_loaded"
+                    {Data && Data.map((item, index) => (
+                      < tr key={index}>
+                        <td>
+                          <div className="display-flex align-center">
+                            <div className="img-product">
+                              <img
+                                src={item.image}
+                                alt
+                                className="mCS_img_loaded"
+                              />
+                            </div>
+                            <div className="name-product">
+                              {item.title}
+                              <br />
+                              G2356
+                            </div>
+                            <div className="price">${item.price}</div>
+                          </div>
+                        </td>
+                        <td className="product-count">
+                          <form action="#" className="count-inlineflex">
+                            <div className="qtyminus" onClick={() => { dispatch(deCrement(Number(1))) }}>-</div>
+                            <input
+                              type="text"
+                              name="quantity"
+                              value={number}
+                              className="qty"
                             />
-                          </div>
-                          <div className="name-product">
-                            Apple iPad Mini
-                            <br />
-                            G2356
-                          </div>
-                          <div className="price">$1,250.00</div>
-                        </div>
-                      </td>
-                      <td className="product-count">
-                        <form action="#" className="count-inlineflex">
-                          <div className="qtyminus">-</div>
-                          <input
-                            type="text"
-                            name="quantity"
-                            defaultValue={1}
-                            className="qty"
-                          />
-                          <div className="qtyplus">+</div>
-                        </form>
-                      </td>
-                      <td>
-                        <div className="total">$6,250.00</div>
-                      </td>
-                      <td>
-                        <a href="#" title>
-                          <img
-                            src="images/icons/delete.png"
-                            alt
-                            className="mCS_img_loaded"
-                          />
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="display-flex align-center">
-                          <div className="img-product">
-                            <img
-                              src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg"
-                              alt
-                              className="mCS_img_loaded"
-                            />
-                          </div>
-                          <div className="name-product">
-                            Apple iPad Mini
-                            <br />
-                            G2356
-                          </div>
-                          <div className="price">$1,250.00</div>
-                        </div>
-                      </td>
-                      <td className="product-count">
-                        <form action="#" className="count-inlineflex">
-                          <div className="qtyminus">-</div>
-                          <input
-                            type="text"
-                            name="quantity"
-                            defaultValue={1}
-                            className="qty"
-                          />
-                          <div className="qtyplus">+</div>
-                        </form>
-                      </td>
-                      <td>
-                        <div className="total">$6,250.00</div>
-                      </td>
-                      <td>
-                        <a href="#" title>
-                          <img
-                            src="images/icons/delete.png"
-                            alt
-                            className="mCS_img_loaded"
-                          />
-                        </a>
-                      </td>
-                    </tr>
+                            <div className="qtyplus" onClick={() => { dispatch(inCrement(Number(1))) }}>+</div>
+                          </form>
+                        </td>
+                        <td>
+                          <div className="total">${item.price * number}</div>
+                        </td>
+                        <td width="10%" class="text-center" onClick={(e) => deleteHandle(item) }>
+                          <a
+                            class="trash-icon"
+
+                          >
+                            <i class="far fa-trash-alt"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+
                   </tbody>
                 </table>
                 <div className="coupon-box">

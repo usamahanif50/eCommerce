@@ -13,8 +13,8 @@ import { AddtoCart } from "./component/main/addTocart/AddtoCart";
 function App() {
   return (
     <div className="App">
-      <AddtoCart/>
-      {/* <Main></Main>
+      {/* <AddtoCart/> */}
+      <Main></Main>
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />}></Route>
@@ -26,7 +26,7 @@ function App() {
         <Route element={<Auth />}>
           <Route path={"/dashboard/*"} element={<DashboardHome />}></Route>
         </Route>
-      </Routes> */}
+      </Routes>
     </div>
   );
 }

@@ -52,6 +52,12 @@ export const Home = () => {
           Wiishlist <i className="fa fa-heart-o"></i>
         </h1>
       </Link>
+      <Link to="/cart">
+        {" "}
+        <h1 style={{ textAlign: "center" }}>
+          Cart <i className="fa fa-shopping-cart"></i>
+        </h1>
+      </Link>
       {/* <input type="text" onChange={(e) => hanlde(e)}></input> */}
       <div className="container home-Section1 ">
         <div className="row ">

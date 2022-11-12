@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { Routes, Route, Link } from "react-router-dom";
+import { AddtoCart } from "./addTocart/AddtoCart";
 import { Loader } from "./loader/Loader";
 
 const ProductPage = React.lazy(() =>
@@ -15,6 +16,7 @@ const Main = () => {
         <Route path="/products" element={<Products />}></Route>
         <Route path="/product/:id" element={<ProductPage />}></Route>
         <Route path="/wishlist" element={<WishList />}></Route>
+        <Route path="/cart" element={<AddtoCart/>}></Route>
       </Routes>
     </Suspense>
   );

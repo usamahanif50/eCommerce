@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 export default function ProductPage() {
   const [Quantity, setQuantity] = useState(1);
   const [Data, setData] = useState("");
-  const { cart, setCart, total, setTotal } = useContext(userContext);
+  const { cart, setCart, total, setTotal,cartItem, setCartItem, totalCartItem, setTotalCartItem  } = useContext(userContext);
 
   const { id } = useParams();
   console.log(id);
@@ -34,6 +34,10 @@ export default function ProductPage() {
       setQuantity(Quantity - 1);
     }
   };
+
+  const cartHandle=(e)=>{
+    setCartItem(e)
+  }
 
   return (
     <>
@@ -75,9 +79,9 @@ export default function ProductPage() {
                   Wishlist <i class="fa fa-heart-o"></i>
                 </button>
                 <br></br>
-                <Link to="">
-                  <button className="addToCart">Add to cart</button>
-                </Link>
+                
+                  <button className="addToCart"onClick={(e)=>cartHandle(Data)}>Add to cart</button>
+                
               </div>
             </div>
           </div>
