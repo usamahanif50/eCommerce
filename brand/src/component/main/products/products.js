@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../../store/ProdcutSlice";
+
 import { Link } from "react-router-dom";
 import "./Product.css";
 const products = () => {
+  const dispatch = useDispatch();
   const [Data, setData] = useState("");
   const [currenceyIcon, setcurrenceyIcon] = useState("$");
+  const { data: products, status } = useSelector((state) => state.product);
   useEffect(() => {
-    fetch("http://localhost:3000/products")
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  });
+    // fetch("http://localhost:3000/products")
+    //   .then((res) => res.json())
+    //   .then((data) => setData(data));
 
-  const productHeader = {};
+    dispatch(fetchProducts());
+  }, []);
+
+  // const productHeader = {};
 
   return (
     <>
@@ -25,8 +32,8 @@ const products = () => {
       <div className="container mainProducts">
         <div className="row"></div>
         <div className="row">
-          {Data &&
-            Data.map((item, index) => (
+          {products &&
+            products.map((item, index) => (
               <Link to={`/product/${item.id}`}>
                 <div className="card col-md-12" style={{ width: "15rem" }}>
                   <img

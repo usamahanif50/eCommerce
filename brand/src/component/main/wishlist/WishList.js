@@ -1,26 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
-import { userContext } from "../../../Context";
+import { useDispatch, useSelector } from "react-redux";
+import { wishRemove } from "../../../store/wishlistSlice";
+
 import "./wishlist.css";
 
 const WishList = () => {
-  const { cart, setCart, total, setTotal } = useContext(userContext);
   const [Items, setItems] = useState();
   const [Data, setData] = useState("");
   const [Del, setDel] = useState(true);
   const [totalItem, setTotalItem] = useState(Data.length);
 
+  const wishProduct = useSelector((state) => state.wishlist);
+  const dispatch = useDispatch();
+
   const deleteHandle = (e) => {
-    const index = total.indexOf(e);
-    if (index > -1) {
-      total.splice(index, 1);
-    }
-    setDel(false);
+    dispatch(wishRemove(e));
   };
-  useEffect(() => {
-    setDel(true);
-    setData(total);
-    setTotalItem(Data.length);
-  }, [Del]);
+  // useEffect(() => {
+  //   setDel(true);
+  //   setData(total);
+  //   setTotalItem(Data.length);
+  // }, [Del]);
 
   return (
     <div className="container">
@@ -28,7 +28,7 @@ const WishList = () => {
         <div class="cart-wrap col-md-12">
           <div>
             <div class="main-heading mb-10">My wishlist</div>
-            <h2>{totalItem}</h2>
+            <h2>{wishProduct.length}</h2>
             <div class="table-wishlist">
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <thead>
@@ -41,8 +41,8 @@ const WishList = () => {
                   </tr>
                 </thead>
 
-                {Data &&
-                  Data.map((item, index) => (
+                {wishProduct &&
+                  wishProduct.map((item, index) => (
                     <tbody>
                       <tr>
                         <td width="45%">
@@ -67,7 +67,7 @@ const WishList = () => {
                         <td width="10%" class="text-center">
                           <a
                             class="trash-icon"
-                            onClick={(e) => deleteHandle(item)}
+                            onClick={(e) => deleteHandle(item.id)}
                           >
                             <i class="far fa-trash-alt"></i>
                           </a>

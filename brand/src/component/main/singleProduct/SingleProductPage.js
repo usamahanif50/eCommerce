@@ -1,20 +1,29 @@
-import React, { useEffect, useState, useContext } from "react";
-import { userContext } from "../../../Context";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../singleProduct/SingleProductPage.css";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { add } from "../../../store/CartSlice";
+import { wishAdd } from "../../../store/wishlistSlice";
 
 export default function ProductPage() {
   const [Quantity, setQuantity] = useState(1);
-  const [Data, setData] = useState("");
-  const { cart, setCart, total, setTotal,cartItem, setCartItem, totalCartItem, setTotalCartItem  } = useContext(userContext);
+  const [Data, setData] = useState(0);
+
+  const cartChk = useSelector((state) => state.cart);
 
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
 
-  const ok = (e) => {
-    setCart(e);
+  const dispatch = useDispatch();
+
+  const addHandle = (product) => {
+    dispatch(add(product));
+  };
+
+  const addwishlisthandle = (e) => {
+    dispatch(wishAdd(e));
   };
 
   useEffect(() => {
@@ -35,9 +44,12 @@ export default function ProductPage() {
     }
   };
 
-  const cartHandle=(e)=>{
-    setCartItem(e)
-  }
+  const cartHandle = (e, a) => {
+    // setCartItem(e);
+    // setAmount(a);
+    setQuantity(1);
+    console.log(e, a);
+  };
 
   return (
     <>
@@ -75,13 +87,17 @@ export default function ProductPage() {
               </div>
 
               <div>
-                <button className="wishlist" onClick={(e) => ok(Data)}>
+                <button
+                  className="wishlist"
+                  onClick={(e) => addwishlisthandle(Data)}
+                >
                   Wishlist <i class="fa fa-heart-o"></i>
                 </button>
                 <br></br>
-                
-                  <button className="addToCart"onClick={(e)=>cartHandle(Data)}>Add to cart</button>
-                
+
+                <button className="addToCart" onClick={(e) => addHandle(Data)}>
+                  Add to cart
+                </button>
               </div>
             </div>
           </div>
